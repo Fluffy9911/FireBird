@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="WINDOWS-1252" standalone="no"?>
+<jardesc>
+    <jar path="IdleGen/libs/FireBird1.0-v2.1-beta.jar"/>
+    <options buildIfNeeded="true" compress="true" descriptionLocation="/FireBird/export.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="true" overwrite="false" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
+    <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
+    <selectedProjects/>
+    <manifest generateManifest="true" manifestLocation="" manifestVersion="1.0" reuseManifest="false" saveManifest="false" usesManifest="true">
+        <sealing sealJar="true">
+            <packagesToSeal/>
+            <packagesToUnSeal/>
+        </sealing>
+    </manifest>
+    <selectedElements exportClassFiles="true" exportJavaFiles="true" exportOutputFolder="false">
+        <folder path="/FireBird/target"/>
+        <file path="/FireBird/.project"/>
+        <folder path="/FireBird/bin"/>
+        <folder path="/FireBird/libs"/>
+        <javaElement handleIdentifier="=FireBird/resources"/>
+        <javaElement handleIdentifier="=FireBird/src=/optional=/true=/=/maven.pomderived=/true=/"/>
+        <file path="/FireBird/.classpath"/>
+    </selectedElements>
+</jardesc>
