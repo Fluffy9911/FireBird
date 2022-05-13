@@ -1,5 +1,7 @@
 package main.fire.game;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Map;
@@ -22,6 +24,7 @@ public abstract class BasicGame extends Program {
 	String gameResources = "";
 	MenuManager menuManager;
 	StateManager stateManager;
+	Dimension res = Toolkit.getDefaultToolkit().getScreenSize();
 
 	public BasicGame(String name, int x, int y) {
 		super(name);
@@ -32,7 +35,7 @@ public abstract class BasicGame extends Program {
 		this.loadCache(this.getCacheForProgram().getTwo());
 
 		this.addDisplay(x, y);
-
+		this.getDisplay().setAsRes();
 		this.getDisplay().loadCache(this.getCacheForProgram().getTwo());
 		manager = new GameSaveingManager(this);
 		menuManager = new MenuManager(this.getDisplay(), this);

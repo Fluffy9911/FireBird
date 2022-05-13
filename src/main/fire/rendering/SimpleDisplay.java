@@ -3,6 +3,7 @@ package main.fire.rendering;
 import java.awt.Canvas;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferStrategy;
@@ -135,7 +136,7 @@ public class SimpleDisplay implements ICache, IUpdateable, MainTick {
 				gs = cv.getBufferStrategy().getDrawGraphics();
 				render.tickRenderer();
 
-				gs.drawImage(render.getFrame(), 0, 0, null);
+				gs.drawImage(render.getFrame(), 0, 0, width, height, null);
 				bs.show();
 				gs.clearRect(0, 0, getWidth(), getHeight());
 				gs.dispose();
@@ -200,4 +201,9 @@ public class SimpleDisplay implements ICache, IUpdateable, MainTick {
 		return scroll;
 	}
 
+	public void setAsRes() {
+		this.width = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
+		this.height = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight();
+		frame.setSize(width, height);
+	}
 }
