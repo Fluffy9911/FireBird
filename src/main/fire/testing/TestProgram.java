@@ -4,6 +4,8 @@ import main.fire.cache.CacheObject;
 import main.fire.game.BasicGame;
 import main.fire.game.IO.KeyInput;
 import main.fire.game.game.gameplay.BasicBB;
+import main.module.fire.ModuleLoader;
+import main.module.fire.testing.ExampleModule;
 
 public class TestProgram extends BasicGame {
 	BasicBB bb;
@@ -12,6 +14,11 @@ public class TestProgram extends BasicGame {
 	public TestProgram(String name, int x, int y) {
 		super(name, x, y);
 		bb = new BasicBB(this.getDisplay(), 10, 10, 50, 50);
+	}
+
+	@Override
+	public void addModulesEvent() {
+		ModuleLoader.addModule(new ExampleModule());
 	}
 
 	@Override

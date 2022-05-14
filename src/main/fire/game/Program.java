@@ -7,7 +7,6 @@ import main.fire.cache.CacheManager;
 import main.fire.cache.CacheObject;
 import main.fire.cache.ICache;
 import main.fire.core.Core;
-import main.fire.core.CoreModule;
 import main.fire.core.debug.Debug;
 import main.fire.core.debug.MSCalc;
 import main.fire.game.IO.KeyManager;
@@ -17,6 +16,7 @@ import main.fire.runtime.RuntimeEngine;
 import main.fire.util.Dual;
 import main.fire.util.IUpdateable;
 import main.fire.util.PathMaker;
+import main.module.fire.ModuleLoader;
 
 public abstract class Program implements IUpdateable, ICache {
 	RuntimeEngine engine;
@@ -57,6 +57,7 @@ public abstract class Program implements IUpdateable, ICache {
 
 			c.end();
 			Debug.printInfo("It took: " + c.getEnd() + "ms to start init the program");
+			Debug.printInfo("loaded modules " + ModuleLoader.modules.toString());
 		} catch (Exception e) {
 			Debug.debugError(getClass(), e);
 		}
@@ -76,11 +77,6 @@ public abstract class Program implements IUpdateable, ICache {
 		System.out.println("made display");
 		display = new SimpleDisplay(width, height, name, this);
 		engine.setDisplay(display);
-	}
-
-	public void addModule(CoreModule module) {
-		// Debug.printInfo("Added Module: " + module.getModuleID());
-		Core.modules.add(module);
 	}
 
 	public void addModulesEvent() {

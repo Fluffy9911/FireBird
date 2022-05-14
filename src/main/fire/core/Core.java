@@ -14,6 +14,7 @@ import main.fire.util.ICore;
 import main.fire.util.IUpdateable;
 import main.fire.util.Status;
 import main.fire.util.Type;
+import main.module.fire.ModuleLoader;
 
 public class Core {
 	// resources
@@ -25,7 +26,7 @@ public class Core {
 	public static List<ICore> core;
 	public static Timer CORE_UPDATER;
 	public static List<IUpdateable> updater;
-	public static List<CoreModule> modules = createModules();
+	public static boolean modules = false;
 	public static Status STATUS = Status.NONE;
 	public static Type type = Type.DEV;
 	public static boolean firstTime = true;
@@ -34,17 +35,9 @@ public class Core {
 		Debug.init();
 		Debug.printInfo("Starting core Init! Core Version: " + CoreInfo.CORE_VERSION);
 		MSCalc calc = new MSCalc();
-		Debug.printInfo("Looking for modules");
-		if (!modules.isEmpty()) {
-			Debug.printInfo("Starting module init");
-			for (int i = 0; i < modules.size(); i++) {
-				MSCalc c = new MSCalc();
-				modules.get(i).coreInit();
-				c.end();
-				Debug.printInfo("It took: " + c.getEnd() + "ms to init: " + modules.get(i).getModuleID());
-
-			}
-		}
+		modules = ModuleLoader.checkForModules();
+		if (modules)
+			ModuleLoader.init();
 		STATUS = Status.STARTING;
 		initLists();
 
@@ -60,11 +53,6 @@ public class Core {
 		startUpdater();
 	}
 
-	private static List<CoreModule> createModules() {
-		// TODO Auto-generated method stub
-		return new ArrayList<>();
-	}
-
 	public static void cacheEvent() {
 		ResourceFinder.checkForFileExistance();
 		Debug.printInfo("Is first time setup? " + firstTime);
@@ -76,11 +64,7 @@ public class Core {
 			MAIN_CACHE.setCacheFile(ResourceFinder.getCoreCache());
 			ResourceFinder.firstTimeSetupCache(MAIN_CACHE_OBJECT);
 		}
-		for (int i = 0; i < modules.size(); i++) {
-			modules.get(i).cacheEvent();
-			modules.get(i).loadCache(MAIN_CACHE_OBJECT);
-			modules.get(i).save(MAIN_CACHE_OBJECT);
-		}
+
 		reloadCache();
 		for (ICore c : core) {
 			c.loadCache(MAIN_CACHE_OBJECT);
@@ -89,7 +73,8 @@ public class Core {
 			c.saveCache(MAIN_CACHE_OBJECT);
 		}
 		saveCache();
-
+		if (modules)
+			ModuleLoader.cacheEvent(MAIN_CACHE_OBJECT, MAIN_CACHE);
 	}
 
 	public static void initLists() {

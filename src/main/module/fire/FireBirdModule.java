@@ -1,43 +1,16 @@
 package main.module.fire;
 
+import main.fire.cache.CacheManager;
 import main.fire.cache.CacheObject;
-import main.fire.game.Program;
 
-public abstract class FireBirdModule extends Program {
+public abstract class FireBirdModule {
 
-	public FireBirdModule(String name) {
-		super(name);
-		// TODO Auto-generated constructor stub
-	}
+	public abstract void init();
 
-	@Override
-	public void saveCache(CacheObject obj) {
-		// TODO Auto-generated method stub
+	public abstract void cacheEvent(CacheObject obj, CacheManager m);
 
-	}
+	public abstract String uniqueID();
 
-	@Override
-	public void loadCache(CacheObject m) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void start() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void loadAssets() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void programEnd() {
-		// TODO Auto-generated method stub
-
-	}
+	public abstract String version();
 
 }
