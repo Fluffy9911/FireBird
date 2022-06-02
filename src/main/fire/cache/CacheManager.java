@@ -16,6 +16,7 @@ import org.json.simple.parser.ParseException;
 import main.fire.core.Core;
 import main.fire.core.debug.Debug;
 import main.fire.core.debug.MSCalc;
+import main.fire.exception.CacheException;
 
 public class CacheManager {
 	File f;
@@ -23,12 +24,15 @@ public class CacheManager {
 	String location = "";
 	String text = "";
 
-	public void createCoreFileForCaching(String name) {
+	public void createCoreFileForCaching(String name) throws CacheException {
 
 		createCacheFile(name, Core.CACHE_LOCATION);
+
 	}
 
-	public void createCacheFile(String name, String path) {
+	public void createCacheFile(String name, String path) throws CacheException {
+		if (name == null || path == null)
+			throw new CacheException();
 
 		File g = new File(path);
 		f = new File(path + "/" + name + ".fbc");
@@ -52,10 +56,10 @@ public class CacheManager {
 		this.f = f;
 	}
 
-	public String readFromFile() throws IOException {
+	public String readFromFile() throws IOException, CacheException {
 		if (!f.exists()) {
 			System.out.println("doesn't exist");
-			return "null";
+			throw new CacheException();
 		}
 		FileInputStream inputStream = null;
 		Scanner sc = null;
@@ -81,18 +85,21 @@ public class CacheManager {
 		return text;
 	}
 
-	public void populateMap(CacheObject cache) {
+	public void populateCacheObject(CacheObject cache) {
 		MSCalc c = new MSCalc();
 		JSONObject obj = this.readJson();
 		c.end();
 		Debug.printInfo("Took:" + c.getEnd() + " ms to read from file: " + f.getName());
 		Debug.printInfo("starting map transfer...");
+
 		try {
 			cache.setObj(obj);
-		} catch (Exception e) {
+		} catch (CacheException e) {
 			Debug.debugError(getClass(), e);
 			Debug.error("Error transfering map...");
+			e.printStackTrace();
 		}
+
 	}
 
 	public synchronized JSONObject readJson() {
@@ -111,7 +118,7 @@ public class CacheManager {
 				reader.close();
 
 			}
-		} catch (IOException | ParseException e) {
+		} catch (IOException | ParseException | CacheException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -127,7 +134,7 @@ public class CacheManager {
 				writer.write(obj.getObj().toJSONString());
 			}
 			writer.close();
-		} catch (IOException e) {
+		} catch (IOException | CacheException e) {
 			Debug.debugError(getClass(), e);
 		}
 

@@ -34,9 +34,9 @@ public class Debug {
 
 	public static void write() throws IOException {
 		PathMaker.makePath("firebird/logs");
-		File f = new File("firebird/logs/log.txt");
-		if (f.exists())
-			f.delete();
+
+		File f = new File("firebird/logs/log_" + System.currentTimeMillis() + ".txt");
+
 		f.createNewFile();
 		BufferedWriter writer = new BufferedWriter(new FileWriter(f));
 

@@ -9,12 +9,11 @@ public class MouseManager implements MouseListener {
 	@SuppressWarnings("static-access")
 	@Override
 	public void mouseClicked(MouseEvent e) {
-
 		if (e.getButton() == MouseEvent.BUTTON1) {
 
 			left = true;
 			try {
-				Thread.currentThread().sleep(3);
+				Thread.sleep(3);
 			} catch (InterruptedException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -25,7 +24,7 @@ public class MouseManager implements MouseListener {
 
 			right = true;
 			try {
-				Thread.currentThread().sleep(3);
+				Thread.sleep(3);
 			} catch (InterruptedException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -37,7 +36,29 @@ public class MouseManager implements MouseListener {
 
 	@Override
 	public void mousePressed(MouseEvent e) {
+		if (e.getButton() == MouseEvent.BUTTON1) {
 
+			left = true;
+			try {
+				Thread.sleep(3);
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			left = false;
+		}
+		if (e.getButton() == MouseEvent.BUTTON3) {
+
+			right = true;
+			try {
+				Thread.sleep(3);
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			right = false;
+
+		}
 	}
 
 	@Override

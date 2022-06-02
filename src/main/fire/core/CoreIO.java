@@ -9,6 +9,7 @@ public class CoreIO {
 
 	public void startProgram(Program p) {
 		this.pg = p;
+		Core.addProgram(p);
 		p.getProgramThread().startThread();
 		p.start();
 
@@ -19,7 +20,7 @@ public class CoreIO {
 
 	}
 
-	public Program getPg() {
+	public Program getProgram() {
 		return pg;
 	}
 

@@ -4,6 +4,8 @@ import java.util.Map;
 
 import org.json.simple.JSONObject;
 
+import main.fire.exception.CacheException;
+
 public class CacheObject {
 
 	JSONObject obj;
@@ -19,17 +21,26 @@ public class CacheObject {
 		return this;
 	}
 
-	public JSONObject getObj() {
+	public CacheObject add(Object key, Object object) {
+		obj.put(key, object);
+		return this;
+	}
+
+	public JSONObject getObj() throws CacheException {
+		// if (obj.isEmpty())
+		// throw new CacheException();
 		return obj;
 	}
 
-	public void setObj(JSONObject obj) {
+	public void setObj(JSONObject obj) throws CacheException {
+		// if (obj.isEmpty())
+		// throw new CacheException();
 		this.obj = obj;
 	}
 
 	@Override
 	public String toString() {
-		return "CacheObject [obj=" + obj.toJSONString() + "]";
+		return "CacheObject [obj=" + "]";
 
 	}
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="WINDOWS-1252" standalone="no"?>
 <jardesc>
-    <jar path="IdleGen/libs/FireBird1.0-v2.1-beta.jar"/>
+    <jar path="IdleGen/libs/FireBird1.1-beta-dev.jar"/>
     <options buildIfNeeded="true" compress="true" descriptionLocation="/FireBird/export.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="true" overwrite="false" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
     <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
     <selectedProjects/>

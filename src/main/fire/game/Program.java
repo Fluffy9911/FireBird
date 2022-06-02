@@ -19,6 +19,7 @@ import main.fire.util.PathMaker;
 import main.module.fire.ModuleLoader;
 
 public abstract class Program implements IUpdateable, ICache {
+	ProgramHolder holder;
 	RuntimeEngine engine;
 	String name;
 	File location;
@@ -34,9 +35,9 @@ public abstract class Program implements IUpdateable, ICache {
 		PathMaker.makePath("firebird/cache/" + name);
 		try {
 			cache = Cache.createCacheDual(name + "/" + name);
-			cache.getOne().populateMap(cache.getTwo());
+			cache.getOne().populateCacheObject(cache.getTwo());
 			cache.setTwo(new CacheObject());
-			cache.getOne().populateMap(cache.getTwo());
+			cache.getOne().populateCacheObject(cache.getTwo());
 			loadCache(cache.getTwo());
 			saveCache(cache.getTwo());
 
@@ -70,7 +71,7 @@ public abstract class Program implements IUpdateable, ICache {
 			}
 
 		});
-
+		Core.addProgram(this);
 	}
 
 	public void addDisplay(int width, int height) {
@@ -100,7 +101,7 @@ public abstract class Program implements IUpdateable, ICache {
 	}
 
 	public void cacheSaveAndLoad(ICache c, CacheObject obj) {
-		getCacheForProgram().getOne().populateMap(obj);
+		getCacheForProgram().getOne().populateCacheObject(obj);
 		c.saveCache(obj);
 		c.loadCache(obj);
 		this.getCacheForProgram().getOne().writeCacheToFile(obj);

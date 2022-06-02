@@ -14,6 +14,7 @@ import javax.swing.WindowConstants;
 import main.fire.cache.CacheObject;
 import main.fire.cache.ICache;
 import main.fire.core.debug.Debug;
+import main.fire.exception.CacheException;
 import main.fire.game.Program;
 import main.fire.game.IO.Key;
 import main.fire.game.IO.MouseManager;
@@ -60,7 +61,7 @@ public class SimpleDisplay implements ICache, IUpdateable, MainTick {
 		render = new Renderer(this);
 		frame.setSize(width, height);
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
+		frame.setResizable(false);
 		mousepos = new Point(0, 0);
 		cv.setSize(width, height);
 		cv.setVisible(true);
@@ -68,7 +69,7 @@ public class SimpleDisplay implements ICache, IUpdateable, MainTick {
 		cv.addKeyListener(key);
 		cv.addMouseWheelListener(scroll);
 		mouseBounds = new SimpleBB(this, 0, 0, 0, 0);
-
+		mouseBounds.setShouldrender(true);
 		cv.addMouseMotionListener(new MouseMotionListener() {
 
 			@Override
@@ -100,15 +101,25 @@ public class SimpleDisplay implements ICache, IUpdateable, MainTick {
 	@Override
 	public void loadCache(CacheObject obj) {
 
-		if (obj.getObj().get(name + "width") != null) {
-			Debug.printInfo("found cached info loading...");
-			width = obj.getInt(name + "width");
-			frame.setSize(width, height);
+		try {
+			if (obj.getObj().get(name + "width") != null) {
+				Debug.printInfo("found cached info loading...");
+				width = obj.getInt(name + "width");
+				frame.setSize(width, height);
+			}
+		} catch (CacheException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		if (obj.getObj().get(name + "height") != null) {
-			Debug.printInfo("found cached info loading...");
-			height = obj.getInt(name + "height");
-			frame.setSize(width, height);
+		try {
+			if (obj.getObj().get(name + "height") != null) {
+				Debug.printInfo("found cached info loading...");
+				height = obj.getInt(name + "height");
+				frame.setSize(width, height);
+			}
+		} catch (CacheException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
@@ -132,6 +143,7 @@ public class SimpleDisplay implements ICache, IUpdateable, MainTick {
 		if (shown) {
 			mouseBounds.tick();
 			mouseBounds.updatePos(mousepos.x, mousepos.y, 10, 10);
+
 			do {
 				gs = cv.getBufferStrategy().getDrawGraphics();
 				render.tickRenderer();

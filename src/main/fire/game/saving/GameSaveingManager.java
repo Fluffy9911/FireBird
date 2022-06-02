@@ -22,7 +22,7 @@ public class GameSaveingManager {
 	}
 
 	public CacheObject getCacheData() {
-		saver.populateMap(cacheMap);
+		saver.populateCacheObject(cacheMap);
 		return cacheMap;
 	}
 

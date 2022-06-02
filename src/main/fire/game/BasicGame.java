@@ -35,7 +35,7 @@ public abstract class BasicGame extends Program {
 		this.loadCache(this.getCacheForProgram().getTwo());
 
 		this.addDisplay(x, y);
-		this.getDisplay().setAsRes();
+		// this.getDisplay().setAsRes();
 		this.getDisplay().loadCache(this.getCacheForProgram().getTwo());
 		manager = new GameSaveingManager(this);
 		menuManager = new MenuManager(this.getDisplay(), this);

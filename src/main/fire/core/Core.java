@@ -9,6 +9,8 @@ import main.fire.cache.CacheManager;
 import main.fire.cache.CacheObject;
 import main.fire.core.debug.Debug;
 import main.fire.core.debug.MSCalc;
+import main.fire.exception.CacheException;
+import main.fire.game.Program;
 import main.fire.resources.ResourceFinder;
 import main.fire.util.ICore;
 import main.fire.util.IUpdateable;
@@ -20,6 +22,7 @@ public class Core {
 	// resources
 	public static final String CACHE_LOCATION = "firebird/cache";
 	public static final String CACHE = "main_cache";
+	public static final String FIREBIRD_DATA = "firebird/data";
 	// init needed
 	public static CacheManager MAIN_CACHE;
 	public static CacheObject MAIN_CACHE_OBJECT;
@@ -30,10 +33,12 @@ public class Core {
 	public static Status STATUS = Status.NONE;
 	public static Type type = Type.DEV;
 	public static boolean firstTime = true;
+	public static Program program;
 
 	public static void initCore() {
 		Debug.init();
-		Debug.printInfo("Starting core Init! Core Version: " + CoreInfo.CORE_VERSION);
+		Debug.printInfo("Getting settings...");
+		Debug.printInfo("Starting core Init! Core Version: " + CoreInfo.CORE_VERSION + " in " + type.toString());
 		MSCalc calc = new MSCalc();
 		modules = ModuleLoader.checkForModules();
 		if (modules)
@@ -59,7 +64,11 @@ public class Core {
 		MAIN_CACHE = new CacheManager();
 		MAIN_CACHE_OBJECT = new CacheObject();
 		if (firstTime) {
-			MAIN_CACHE.createCoreFileForCaching(CACHE);
+			try {
+				MAIN_CACHE.createCoreFileForCaching(CACHE);
+			} catch (CacheException e) {
+				Debug.debugError(Core.class, e);
+			}
 		} else {
 			MAIN_CACHE.setCacheFile(ResourceFinder.getCoreCache());
 			ResourceFinder.firstTimeSetupCache(MAIN_CACHE_OBJECT);
@@ -104,7 +113,7 @@ public class Core {
 	 */
 	public static void reloadCache() {
 		MAIN_CACHE_OBJECT = new CacheObject();
-		MAIN_CACHE.populateMap(MAIN_CACHE_OBJECT);
+		MAIN_CACHE.populateCacheObject(MAIN_CACHE_OBJECT);
 	}
 
 	public static void saveCache() {
@@ -126,6 +135,14 @@ public class Core {
 	public static Type getType() {
 
 		return type;
+	}
+
+	public static void addProgram(Program prg) {
+		program = prg;
+	}
+
+	public static Program getGameProgram() {
+		return program;
 	}
 
 }
