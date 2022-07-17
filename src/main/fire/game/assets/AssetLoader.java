@@ -34,7 +34,7 @@ public class AssetLoader {
 			BufferedImage img = new BufferedImage(16, 16, BufferedImage.OPAQUE);
 			try {
 				img = ImageIO.read(entry.getValue());
-				Debug.printInfo("Loaded image: " + entry.getKey());
+				Debug.printInfo("Loaded image: " + entry.getKey(), true);
 			} catch (IOException e) {
 				Debug.debugError(getClass(), e);
 				Debug.error("Error Loading image: " + entry.getKey());

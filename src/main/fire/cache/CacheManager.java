@@ -47,7 +47,7 @@ public class CacheManager {
 				Debug.debugError(getClass(), e);
 			}
 		} else {
-			Debug.printInfo("File Already Exists: " + f.getName());
+			Debug.printInfo("File Already Exists: " + f.getName(), true);
 		}
 		loc = this.getClass().getResource(path + "/" + name + ".fbc");
 	}
@@ -89,8 +89,8 @@ public class CacheManager {
 		MSCalc c = new MSCalc();
 		JSONObject obj = this.readJson();
 		c.end();
-		Debug.printInfo("Took:" + c.getEnd() + " ms to read from file: " + f.getName());
-		Debug.printInfo("starting map transfer...");
+		Debug.printInfo("Took:" + c.getEnd() + " ms to read from file: " + f.getName(), true);
+		Debug.printInfo("starting map transfer...", true);
 
 		try {
 			cache.setObj(obj);

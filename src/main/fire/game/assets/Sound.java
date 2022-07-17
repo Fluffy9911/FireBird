@@ -49,7 +49,8 @@ public class Sound {
 			float frameRate = format.getFrameRate();
 			float durationInSeconds = (audioFileLength / (frameSize * frameRate));
 			Debug.printInfo(
-					"Played sound file:" + audioClip.toString() + " with a length in seconds of:" + durationInSeconds);
+					"Played sound file:" + audioClip.toString() + " with a length in seconds of:" + durationInSeconds,
+					false);
 			Thread.sleep((long) (durationInSeconds * 1000));
 
 		} catch (LineUnavailableException | IOException | InterruptedException e) {

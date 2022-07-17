@@ -4,6 +4,12 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import main.fire.core.Core;
+import main.fire.game.BasicGame;
+import main.fire.util.PerformanceChecker;
 
 public class Renderer {
 
@@ -12,6 +18,8 @@ public class Renderer {
 	int x, y;
 	List<RenderingObject> toRender;
 	List<PreRenderer> pres;
+	SimpleDisplay ds;
+	int frames = 0;
 
 	public Renderer(SimpleDisplay ds) {
 		frame = new BufferedImage(ds.getWidth(), ds.getHeight(), BufferedImage.TRANSLUCENT);
@@ -19,9 +27,20 @@ public class Renderer {
 		graphics = frame.getGraphics();
 		x = ds.getWidth();
 		y = ds.getHeight();
+		this.ds = ds;
 		toRender = new ArrayList<>();
 		pres = new ArrayList<>();
 		lastFrame = frame;
+		new Timer().schedule(new TimerTask() {
+
+			@Override
+			public void run() {
+				PerformanceChecker.check(((BasicGame) Core.getGameProgram()).getGameRenderer());
+				frames = 0;
+			}
+
+		}, 2000, 1000);
+
 	}
 
 	public void tickRenderer() {
@@ -35,17 +54,14 @@ public class Renderer {
 
 		}
 
-		for (int i = 0; i < pres.size(); i++) {
-
-			frame = pres.get(i).render(frame);
-
-		}
 		graphics.dispose();
 		lastFrame = frame;
-		frame = new BufferedImage(x, y, BufferedImage.TRANSLUCENT);
+		frame = new BufferedImage(ds.getWidth(), ds.getHeight(), BufferedImage.TRANSLUCENT);
 		long endTime = startTime - System.currentTimeMillis();
 		if (endTime > 0)
 			System.out.println("It took:" + endTime + "ms to draw last frame");
+		frames++;
+
 	}
 
 	public BufferedImage getFrame() {
@@ -62,6 +78,10 @@ public class Renderer {
 
 	public List<PreRenderer> getPres() {
 		return pres;
+	}
+
+	public int getFrames() {
+		return frames;
 	}
 
 }

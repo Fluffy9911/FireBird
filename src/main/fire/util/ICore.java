@@ -2,7 +2,6 @@ package main.fire.util;
 
 import main.fire.cache.CacheObject;
 import main.fire.core.Core;
-import main.fire.core.debug.Debug;
 
 public interface ICore {
 	/**
@@ -25,7 +24,7 @@ public interface ICore {
 	 * @param core
 	 */
 	public default void subscribeToCoreEvents(ICore core) {
-		Debug.printInfo("Subscribed: " + this.getName() + " to Core events!");
+
 		Core.core.add(core);
 
 	}

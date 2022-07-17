@@ -3,17 +3,13 @@ package main.fire.game;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.util.Map;
 
-import main.fire.core.debug.Debug;
 import main.fire.game.assets.AssetLoader;
 import main.fire.game.game.menu.MenuManager;
 import main.fire.game.saving.GameSaveingManager;
 import main.fire.game.state.StateManager;
-import main.fire.rendering.BasicRendering;
 import main.fire.rendering.Renderer;
-import main.fire.rendering.RenderingObject;
 import main.fire.rendering.SimpleDisplay;
 import main.fire.runtime.IRun;
 import main.fire.util.PathMaker;
@@ -28,6 +24,7 @@ public abstract class BasicGame extends Program {
 
 	public BasicGame(String name, int x, int y) {
 		super(name);
+
 		assets = new AssetLoader(this);
 		gameResources = this.getResourceBasePath();
 		stateManager = new StateManager(this);
@@ -48,12 +45,7 @@ public abstract class BasicGame extends Program {
 			public void run() {
 				getDisplay().saveCache(getCacheForProgram().getTwo());
 				getCacheForProgram().getOne().writeCacheToFile(getCacheForProgram().getTwo());
-				try {
-					Debug.write();
-				} catch (IOException e) {
-					Debug.debugError(getClass(), e);
-					Debug.error("error writing logs...");
-				}
+
 				onEnd();
 			}
 
@@ -71,7 +63,7 @@ public abstract class BasicGame extends Program {
 		});
 	}
 
-	public void createGameResourcesPath() {
+	private void createGameResourcesPath() {
 		PathMaker.makePath(gameResources);
 	}
 
@@ -81,10 +73,6 @@ public abstract class BasicGame extends Program {
 
 	public Renderer getGameRenderer() {
 		return this.getDisplay().getRenderer();
-	}
-
-	public RenderingObject createRenderingObject() {
-		return new BasicRendering(this.getGameRenderer());
 	}
 
 	public AssetLoader getAssetLoader() {

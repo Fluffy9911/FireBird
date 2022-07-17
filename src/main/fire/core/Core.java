@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import main.fire.anotations.Marked;
 import main.fire.cache.CacheManager;
 import main.fire.cache.CacheObject;
 import main.fire.core.debug.Debug;
@@ -15,6 +16,7 @@ import main.fire.resources.ResourceFinder;
 import main.fire.util.ICore;
 import main.fire.util.IUpdateable;
 import main.fire.util.Status;
+import main.fire.util.StatusMarker;
 import main.fire.util.Type;
 import main.module.fire.ModuleLoader;
 
@@ -36,31 +38,29 @@ public class Core {
 	public static Program program;
 
 	public static void initCore() {
-		Debug.init();
-		Debug.printInfo("Getting settings...");
-		Debug.printInfo("Starting core Init! Core Version: " + CoreInfo.CORE_VERSION + " in " + type.toString());
+		var st = StatusMarker.create("CORE");
+		Debug.printInfo("Getting settings...", true);
+		Debug.printInfo("Starting core Init! Core Version: " + CoreInfo.CORE_VERSION + " in " + type.toString(), true);
 		MSCalc calc = new MSCalc();
 		modules = ModuleLoader.checkForModules();
 		if (modules)
 			ModuleLoader.init();
-		STATUS = Status.STARTING;
-		initLists();
 
 		cacheEvent();
 
-		STATUS = Status.DONE;
 		calc.end();
-		Debug.printInfo("It took: " + calc.getEnd() + "ms to init the core.");
+		Debug.printInfo("It took: " + calc.getEnd() + "ms to init the core.", false);
 		for (ICore c : core) {
 			c.init();
 		}
-		Debug.printInfo("Starting updater...");
+		Debug.printInfo("Starting updater...", true);
 		startUpdater();
+		st.end();
 	}
 
 	public static void cacheEvent() {
 		ResourceFinder.checkForFileExistance();
-		Debug.printInfo("Is first time setup? " + firstTime);
+		Debug.printInfo("Is first time setup? " + firstTime, false);
 		MAIN_CACHE = new CacheManager();
 		MAIN_CACHE_OBJECT = new CacheObject();
 		if (firstTime) {
@@ -86,6 +86,7 @@ public class Core {
 			ModuleLoader.cacheEvent(MAIN_CACHE_OBJECT, MAIN_CACHE);
 	}
 
+	@Marked
 	public static void initLists() {
 
 		core = new ArrayList<>();
@@ -105,7 +106,7 @@ public class Core {
 			}
 
 		}, 0, 1000);
-		Debug.printInfo("Updater working");
+		Debug.printInfo("Updater working", true);
 	}
 
 	/**
@@ -118,10 +119,6 @@ public class Core {
 
 	public static void saveCache() {
 		MAIN_CACHE.writeCacheToFile(MAIN_CACHE_OBJECT);
-	}
-
-	public static void startCore(CoreIO io) {
-		initCore();
 	}
 
 	public static Status getInitStatus() {

@@ -4,16 +4,11 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-import main.fire.game.Program;
-
 public class KeyManager {
 	List<KeyInput> keys;
 
-	Program p;
+	public KeyManager() {
 
-	public KeyManager(Program p) {
-
-		this.p = p;
 		this.keys = new ArrayList<>();
 	}
 

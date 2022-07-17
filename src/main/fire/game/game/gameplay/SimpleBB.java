@@ -41,6 +41,7 @@ public class SimpleBB implements MainTick {
 
 				@Override
 				public void render(Graphics g) {
+
 					g.setColor(Color.RED);
 					RenderUtils.drawRectangle(bounds, g);
 

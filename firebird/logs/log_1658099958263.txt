@@ -1,0 +1,4 @@
+[Status: STARTING]Starting: CORE
+Is first time setup? false
+It took: 8ms to init the core.
+[Status: DONE]Started: CORE at: 2022/07/17 17:19:16

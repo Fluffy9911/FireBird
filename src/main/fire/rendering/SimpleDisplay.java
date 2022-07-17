@@ -4,8 +4,6 @@ import java.awt.Canvas;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Toolkit;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferStrategy;
 
 import javax.swing.JFrame;
@@ -40,10 +38,13 @@ public class SimpleDisplay implements ICache, IUpdateable, MainTick {
 	Program p;
 	Key key;
 	MouseScroll scroll;
+	int ow, oh;
 
 	public SimpleDisplay(int width, int height, String name, Program p) {
 		this.width = width;
 		this.height = height;
+		ow = width;
+		oh = height;
 		this.name = name;
 		this.p = p;
 		mouse = new MouseManager();
@@ -61,7 +62,7 @@ public class SimpleDisplay implements ICache, IUpdateable, MainTick {
 		render = new Renderer(this);
 		frame.setSize(width, height);
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		frame.setResizable(false);
+		frame.setResizable(true);
 		mousepos = new Point(0, 0);
 		cv.setSize(width, height);
 		cv.setVisible(true);
@@ -70,23 +71,7 @@ public class SimpleDisplay implements ICache, IUpdateable, MainTick {
 		cv.addMouseWheelListener(scroll);
 		mouseBounds = new SimpleBB(this, 0, 0, 0, 0);
 		mouseBounds.setShouldrender(true);
-		cv.addMouseMotionListener(new MouseMotionListener() {
 
-			@Override
-			public void mouseDragged(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void mouseMoved(MouseEvent e) {
-
-				mousepos.x = e.getX();
-				mousepos.y = e.getY();
-
-			}
-
-		});
 		frame.add(cv);
 
 	}
@@ -103,7 +88,7 @@ public class SimpleDisplay implements ICache, IUpdateable, MainTick {
 
 		try {
 			if (obj.getObj().get(name + "width") != null) {
-				Debug.printInfo("found cached info loading...");
+				Debug.printInfo("found cached info loading...", true);
 				width = obj.getInt(name + "width");
 				frame.setSize(width, height);
 			}
@@ -113,7 +98,7 @@ public class SimpleDisplay implements ICache, IUpdateable, MainTick {
 		}
 		try {
 			if (obj.getObj().get(name + "height") != null) {
-				Debug.printInfo("found cached info loading...");
+				Debug.printInfo("found cached info loading...", true);
 				height = obj.getInt(name + "height");
 				frame.setSize(width, height);
 			}
@@ -121,6 +106,7 @@ public class SimpleDisplay implements ICache, IUpdateable, MainTick {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		// UpscaleCalculator.calculateUpscale(width, height);
 	}
 
 	@Override
@@ -141,10 +127,16 @@ public class SimpleDisplay implements ICache, IUpdateable, MainTick {
 	public void tick() {
 
 		if (shown) {
+			if (frame.getMousePosition() != null)
+				mousepos = frame.getMousePosition();
+			// mousepos.translate(mousepos.x / (ow / frame.getWidth()), mousepos.y / (oh /
+			// frame.getHeight()));
 			mouseBounds.tick();
-			mouseBounds.updatePos(mousepos.x, mousepos.y, 10, 10);
+			if (frame.getMousePosition() != null)
+				mouseBounds.updatePos(mousepos.x - 10, mousepos.y - 30, 10, 10);
 
 			do {
+
 				gs = cv.getBufferStrategy().getDrawGraphics();
 				render.tickRenderer();
 

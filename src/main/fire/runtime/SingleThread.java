@@ -14,6 +14,7 @@ public class SingleThread {
 			@Override
 			public void run() {
 				while (true) {
+					System.out.println("tt");
 					tick.tick();
 				}
 

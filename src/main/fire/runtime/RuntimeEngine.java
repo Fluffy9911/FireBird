@@ -5,16 +5,16 @@ import java.util.Map;
 
 import main.fire.cache.CacheObject;
 import main.fire.core.Core;
-import main.fire.core.CoreIO;
 import main.fire.core.debug.Debug;
 import main.fire.core.debug.MSCalc;
 import main.fire.rendering.SimpleDisplay;
 import main.fire.util.ICore;
 import main.fire.util.Status;
+import main.fire.util.StatusMarker;
 
 public class RuntimeEngine implements ICore {
 	SimpleDisplay display;
-	CoreIO io;
+
 	Map<String, GameThread> threads;
 
 	public RuntimeEngine() {
@@ -29,22 +29,27 @@ public class RuntimeEngine implements ICore {
 	}
 
 	@Override
+
 	public void init() {
+		var a = StatusMarker.create("Runtime");
 		if (Core.getInitStatus() == Status.STARTING) {
 			Debug.error("Core not started fatal error occured!");
 			return;
 		}
-		Debug.printInfo("Starting runtime init!");
+
 		MSCalc c = new MSCalc();
 
 		c.end();
-		Debug.printInfo("It took: " + c.getEnd() + "ms to start the runtime engine");
-
+		a.end();
 	}
 
 	@Override
 	public void saveCache(CacheObject mainCache) {
 
+	}
+
+	public GameThread getThread(String key) {
+		return threads.get(key);
 	}
 
 	@Override

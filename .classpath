@@ -14,5 +14,10 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="libs/json-simple-1.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/big_r/eclipse-workspace/FireBird/libs/reflections-0.10.2.jar"/>
+	<classpathentry kind="lib" path="libs/slf4j-api-1.7.9.jar"/>
+	<classpathentry kind="lib" path="C:/Users/big_r/eclipse-workspace/FireBird/libs/slf4j-nop-1.7.9.jar"/>
+	<classpathentry kind="lib" path="libs/javassist.jar"/>
+	<classpathentry kind="lib" path="libs/FileUtils1.0.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
