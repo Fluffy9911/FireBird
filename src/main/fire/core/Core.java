@@ -1,5 +1,6 @@
 package main.fire.core;
 
+import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -8,11 +9,18 @@ import java.util.TimerTask;
 import main.fire.anotations.Marked;
 import main.fire.cache.CacheManager;
 import main.fire.cache.CacheObject;
+import main.fire.core.debug.CrashReporter;
 import main.fire.core.debug.Debug;
 import main.fire.core.debug.MSCalc;
 import main.fire.exception.CacheException;
+import main.fire.game.BasicGame;
 import main.fire.game.Program;
+import main.fire.game.assets.AssetLoader;
+import main.fire.game.state.StateManager;
+import main.fire.rendering.RenderingObject;
+import main.fire.resources.FileLocation;
 import main.fire.resources.ResourceFinder;
+import main.fire.runtime.IRun;
 import main.fire.util.ICore;
 import main.fire.util.IUpdateable;
 import main.fire.util.Status;
@@ -25,6 +33,8 @@ public class Core {
 	public static final String CACHE_LOCATION = "firebird/cache";
 	public static final String CACHE = "main_cache";
 	public static final String FIREBIRD_DATA = "firebird/data";
+	public static final String ASSET_LOCATION = "main/resources/firebird";
+	public static final String CORE_CRASH_LOCATION = "firebird/logs/crash_reports";
 	// init needed
 	public static CacheManager MAIN_CACHE;
 	public static CacheObject MAIN_CACHE_OBJECT;
@@ -36,26 +46,37 @@ public class Core {
 	public static Type type = Type.DEV;
 	public static boolean firstTime = true;
 	public static Program program;
+	private static AssetLoader INTERNAL_ASSETS = AssetLoader.create();
+	public static FileLocation programLocation;
 
 	public static void initCore() {
-		var st = StatusMarker.create("CORE");
-		Debug.printInfo("Getting settings...", true);
-		Debug.printInfo("Starting core Init! Core Version: " + CoreInfo.CORE_VERSION + " in " + type.toString(), true);
-		MSCalc calc = new MSCalc();
-		modules = ModuleLoader.checkForModules();
-		if (modules)
-			ModuleLoader.init();
+		try {
+			StatusMarker st = StatusMarker.create("CORE");
+			Debug.printInfo("Getting settings...", true);
+			Debug.printInfo("Starting core Init! Core Version: " + CoreInfo.CORE_VERSION + " in " + type.toString(),
+					true);
+			loadInternalAssets();
+			MSCalc calc = new MSCalc();
+			modules = ModuleLoader.checkForModules();
+			if (modules)
+				ModuleLoader.init();
 
-		cacheEvent();
+			cacheEvent();
 
-		calc.end();
-		Debug.printInfo("It took: " + calc.getEnd() + "ms to init the core.", false);
-		for (ICore c : core) {
-			c.init();
+			calc.end();
+			Debug.printInfo("It took: " + calc.getEnd() + "ms to init the core.", false);
+			for (ICore c : core) {
+				c.init();
+			}
+			Debug.printInfo("Starting updater...", true);
+			startUpdater();
+			st.end();
+		} catch (Exception e) {
+			CrashReporter.dispatchCrash(e);
+			System.out.println("CoreFailure, Exiting");
+			System.out.println(e.getMessage());
+			System.exit(404);
 		}
-		Debug.printInfo("Starting updater...", true);
-		startUpdater();
-		st.end();
 	}
 
 	public static void cacheEvent() {
@@ -91,7 +112,22 @@ public class Core {
 
 		core = new ArrayList<>();
 		updater = new ArrayList<>();
+		INTERNAL_ASSETS = new AssetLoader();
 
+	}
+
+	public static boolean loadInternalAssets() {
+		try {
+			INTERNAL_ASSETS.addBasePath(ASSET_LOCATION);
+			INTERNAL_ASSETS.addTexture("rectangle_16", "assets");
+			INTERNAL_ASSETS.addTexture("rectangle_32", "assets");
+			INTERNAL_ASSETS.addTexture("rectangle_64", "assets");
+			INTERNAL_ASSETS.addTexture("rectangle_128", "assets");
+		} catch (Exception e) {
+			Debug.debugError(Core.class, e);
+			return false;
+		}
+		return true;
 	}
 
 	public static void startUpdater() {
@@ -136,10 +172,31 @@ public class Core {
 
 	public static void addProgram(Program prg) {
 		program = prg;
+
 	}
 
 	public static Program getGameProgram() {
 		return program;
+	}
+
+	public static void gameStart(BasicGame game) {
+		game.getProgramThread().addRun(new IRun() {
+
+			@Override
+			public void run() {
+				StateManager.tick();
+			}
+
+		});
+		new RenderingObject(game.getGameRenderer()) {
+
+			@Override
+			public void render(Graphics g) {
+				StateManager.render(g);
+			}
+
+		};
+
 	}
 
 }

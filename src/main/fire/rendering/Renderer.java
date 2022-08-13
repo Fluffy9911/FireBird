@@ -1,5 +1,7 @@
 package main.fire.rendering;
 
+import java.awt.Dimension;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -13,29 +15,27 @@ import main.fire.util.PerformanceChecker;
 
 public class Renderer {
 
-	BufferedImage frame, lastFrame;
+	BufferedImage frame;
 	Graphics graphics;
-	int x, y;
+	Dimension imageDim;
 	List<RenderingObject> toRender;
-	List<PreRenderer> pres;
 	SimpleDisplay ds;
 	int frames = 0;
 
 	public Renderer(SimpleDisplay ds) {
 		frame = new BufferedImage(ds.getWidth(), ds.getHeight(), BufferedImage.TRANSLUCENT);
-		frame.createGraphics();
-		graphics = frame.getGraphics();
-		x = ds.getWidth();
-		y = ds.getHeight();
 		this.ds = ds;
+		graphics = frame.createGraphics();
+		imageDim = new Dimension(ds.getWidth(), ds.getHeight());
+
 		toRender = new ArrayList<>();
-		pres = new ArrayList<>();
-		lastFrame = frame;
+
 		new Timer().schedule(new TimerTask() {
 
 			@Override
 			public void run() {
-				PerformanceChecker.check(((BasicGame) Core.getGameProgram()).getGameRenderer());
+				if (Core.getGameProgram() instanceof BasicGame)
+					PerformanceChecker.check(((BasicGame) Core.getGameProgram()).getGameRenderer());
 				frames = 0;
 			}
 
@@ -43,45 +43,51 @@ public class Renderer {
 
 	}
 
-	public void tickRenderer() {
+	public BufferedImage show() {
+
 		long startTime = System.currentTimeMillis();
-
-		graphics = frame.getGraphics();
-
-		for (int i = 0; i < toRender.size(); i++) {
-
-			toRender.get(i).render(graphics);
-
+		for (RenderingObject obj : toRender) {
+			obj.render(graphics);
 		}
-
-		graphics.dispose();
-		lastFrame = frame;
-		frame = new BufferedImage(ds.getWidth(), ds.getHeight(), BufferedImage.TRANSLUCENT);
-		long endTime = startTime - System.currentTimeMillis();
-		if (endTime > 0)
-			System.out.println("It took:" + endTime + "ms to draw last frame");
+		long end = System.currentTimeMillis() - startTime;
 		frames++;
+		return this.frame;
 
 	}
 
-	public BufferedImage getFrame() {
-		return lastFrame;
+	void updateSize(Dimension size) {
+		if (!this.imageDim.equals(size)) {
+			frame = new BufferedImage(size.width, size.height, BufferedImage.TRANSLUCENT);
+			this.graphics = frame.createGraphics();
+			imageDim = size;
+		}
 	}
 
-	public Graphics getGraphics() {
-		return graphics;
+	public void end() {
+		graphics.clearRect(0, 0, (int) imageDim.getWidth(), (int) imageDim.getHeight());
 	}
 
 	public List<RenderingObject> getToRender() {
 		return toRender;
 	}
 
-	public List<PreRenderer> getPres() {
-		return pres;
-	}
-
 	public int getFrames() {
 		return frames;
 	}
 
+	public BufferedImage pixelate(Dimension size) {
+		BufferedImage frame = show();
+		BufferedImage show = new BufferedImage(size.width, size.height, BufferedImage.TRANSLUCENT);
+		show.createGraphics();
+		show.getGraphics().drawImage(frame, 0, 0, size.width, size.height, null);
+		return show;
+	}
+
+	public SimpleDisplay getDisplay() {
+		return ds;
+	}
+
+	public FontMetrics getFontMetrics() {
+		return graphics.getFontMetrics();
+	}
 }

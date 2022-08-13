@@ -32,6 +32,15 @@ public class SpecialTextRenderer {
 	}
 
 	/**
+	 * updates renderer to contain the new specified text.
+	 * 
+	 * @param text - the text to update the renderer to
+	 */
+	public void updateText(String text) {
+		this.string = text;
+	}
+
+	/**
 	 * replaces every \n in a string with a new line like logging or other text
 	 * things
 	 * 

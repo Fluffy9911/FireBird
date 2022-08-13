@@ -1,7 +1,0 @@
-  free memory: 250,886  allocated memory: 434,176  max memory: 4,112,384  total free memory: 3,929,094  frames: 137  
-  free memory: 247,754  allocated memory: 434,176  max memory: 4,112,384  total free memory: 3,925,962  frames: 80  
-  free memory: 297,845  allocated memory: 434,176  max memory: 4,112,384  total free memory: 3,976,053  frames: 80  
-  free memory: 253,761  allocated memory: 434,176  max memory: 4,112,384  total free memory: 3,931,969  frames: 81  
-  free memory: 11,952  allocated memory: 399,360  max memory: 4,112,384  total free memory: 3,724,976  frames: 62  
-  free memory: 218,910  allocated memory: 399,360  max memory: 4,112,384  total free memory: 3,931,934  frames: 74  
-  free memory: 271,050  allocated memory: 399,360  max memory: 4,112,384  total free memory: 3,984,074  frames: 72  

@@ -5,9 +5,9 @@ import java.util.List;
 
 public class Utils {
 
-	public static List<String> creatArrayList() {
-		// TODO Auto-generated method stub
-		return new ArrayList<>();
+	public static <T> List<T> creatArrayList() {
+
+		return new ArrayList<T>();
 	}
 
 }

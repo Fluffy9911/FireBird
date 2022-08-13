@@ -61,7 +61,16 @@ public class RuntimeEngine implements ICore {
 	public GameThread createThread(String key) {
 		GameThread t = new GameThread(key);
 		threads.put(key, t);
+		Debug.printInfo(t.getStatus(), true);
 		return t;
+	}
+
+	public void printThreadsStatus() {
+		for (Map.Entry<String, GameThread> entry : threads.entrySet()) {
+			String key = entry.getKey();
+			GameThread val = entry.getValue();
+			Debug.printInfo(val.getStatus(), false);
+		}
 	}
 
 	public void setDisplay(SimpleDisplay display) {

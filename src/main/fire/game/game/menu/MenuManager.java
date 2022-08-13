@@ -1,6 +1,8 @@
 package main.fire.game.game.menu;
 
+import java.awt.Graphics;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import main.fire.game.Program;
@@ -22,4 +24,17 @@ public class MenuManager {
 		menus.add(menu);
 	}
 
+	public void tick() {
+		for (Iterator iterator = menus.iterator(); iterator.hasNext();) {
+			Menu menu = (Menu) iterator.next();
+			menu.tick();
+		}
+	}
+
+	public void render(Graphics g) {
+		for (Iterator iterator = menus.iterator(); iterator.hasNext();) {
+			Menu menu = (Menu) iterator.next();
+			menu.render(g);
+		}
+	}
 }

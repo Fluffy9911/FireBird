@@ -109,15 +109,17 @@ public class CacheManager {
 		InputStreamReader reader;
 
 		try {
-			if (this.readFromFile() != "null" || this.readFromFile() != "") {
+			if (this.f.exists())
+				if (this.readFromFile() != "null" || this.readFromFile() != "") {
 
-				reader = new InputStreamReader(new FileInputStream(f));
-				parser.reset(reader);
-				obj = (JSONObject) parser.parse(reader);
+					reader = new InputStreamReader(new FileInputStream(f));
+					parser.reset(reader);
+					if (parser.parse(reader) != null)
+						obj = (JSONObject) parser.parse(reader);
 
-				reader.close();
+					reader.close();
 
-			}
+				}
 		} catch (IOException | ParseException | CacheException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

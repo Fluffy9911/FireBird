@@ -11,6 +11,7 @@ import main.fire.anotations.End;
 import main.fire.anotations.Marked;
 import main.fire.util.PathMaker;
 import main.fire.util.Status;
+import main.fire.util.Time;
 
 public class Debug {
 	public static List<String> write;
@@ -32,6 +33,10 @@ public class Debug {
 	}
 
 	public static void printInfo(String msg, boolean dbg) {
+		if (debug == true) {
+			write.add(msg);
+			System.out.println("{" + msg + "}");
+		}
 		if (dbg == false) {
 			write.add(msg);
 			System.out.println("{" + msg + "}");
@@ -39,6 +44,7 @@ public class Debug {
 			write.add(msg);
 			System.out.println("{" + msg + "}");
 		}
+		write.add(msg);
 	}
 
 	public static void status(Status s, String msg, boolean dbg) {
@@ -55,9 +61,12 @@ public class Debug {
 	public static void write() throws IOException {
 		PathMaker.makePath("firebird/logs");
 
-		File f = new File("firebird/logs/log_" + System.currentTimeMillis() + ".txt");
-
-		f.createNewFile();
+		File f = new File("firebird/logs/log_" + Time.fileDate() + ".txt");
+		try {
+			f.createNewFile();
+		} catch (Exception e) {
+			Debug.debugError(Debug.class, e);
+		}
 		BufferedWriter writer = new BufferedWriter(new FileWriter(f));
 
 		for (String st : write) {
@@ -65,6 +74,15 @@ public class Debug {
 			writer.newLine();
 		}
 		writer.close();
+
+	}
+
+	public static List<String> getWrite() {
+		return write;
+	}
+
+	public class DebugWriter {
+		List<String> write;
 
 	}
 

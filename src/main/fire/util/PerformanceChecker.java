@@ -44,6 +44,11 @@ public class PerformanceChecker {
 				String string = (String) iterator.next();
 				i += string + "\n";
 			}
-		FileBuilder.createBuilder("firebird/logs/performancedumps", "dump", Extensions.TXT).createAndWrite(i);
+		try {
+			FileBuilder.createBuilder("firebird/logs/performancedumps", "dump" + Time.fileDate(), Extensions.TXT)
+					.createAndWrite(i);
+		} catch (Exception e) {
+			Debug.debugError(PerformanceChecker.class, e);
+		}
 	}
 }

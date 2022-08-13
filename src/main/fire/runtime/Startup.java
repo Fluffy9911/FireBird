@@ -11,7 +11,8 @@ import org.reflections.scanners.MethodAnnotationsScanner;
 import main.fire.anotations.End;
 import main.fire.anotations.Marked;
 import main.fire.core.Core;
-import main.fire.game.BasicGame;
+import main.fire.core.debug.Debug;
+import main.fire.game.Program;
 import main.fire.game.assets.AssetLoader;
 
 public class Startup {
@@ -68,7 +69,17 @@ public class Startup {
 		Core.initCore();
 	}
 
-	public static BasicGame startGameInstance(BasicGame game) {
+	public static boolean testStart() {
+		try {
+			startRuntime();
+		} catch (Exception e) {
+			Debug.debugError(Startup.class, e);
+			return false;
+		}
+		return true;
+	}
+
+	public static Program startGameInstance(Program game) {
 		game.getProgramThread().startThread();
 		game.start();
 

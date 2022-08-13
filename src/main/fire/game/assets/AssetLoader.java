@@ -9,7 +9,6 @@ import java.util.Map;
 import javax.imageio.ImageIO;
 
 import main.fire.core.debug.Debug;
-import main.fire.game.BasicGame;
 
 public class AssetLoader {
 
@@ -18,7 +17,7 @@ public class AssetLoader {
 	private Map<String, BufferedImage> loaded;
 	private boolean isloaded = false;
 
-	public AssetLoader(BasicGame game) {
+	public AssetLoader() {
 
 		this.preLoaded = new HashMap<>();
 		this.loaded = new HashMap<>();
@@ -49,6 +48,7 @@ public class AssetLoader {
 	public void addTexture(String name, String sub) {
 		if (!this.validatePath(name, sub)) {
 			Debug.error("Invalid Texture Location: " + name);
+			Debug.error("/" + basePath + "/" + sub + "/" + name + ".png");
 			return;
 		}
 		if (this.validatePath(name, sub))
@@ -59,6 +59,7 @@ public class AssetLoader {
 	public BufferedImage getTexture(String key) {
 		if (!isloaded) {
 			Debug.error("Unable to get texture due to textures not being loaded!");
+
 			return null;
 		}
 		if (loaded.get(key) == null) {
@@ -85,4 +86,7 @@ public class AssetLoader {
 		return loaded;
 	}
 
+	public static AssetLoader create() {
+		return new AssetLoader();
+	}
 }

@@ -14,6 +14,10 @@ public class BasicBB extends SimpleBB {
 		return display.getMouseBounds().getBounds().intersects(this.getBounds());
 	}
 
+	public boolean intersects(SimpleBB bb) {
+		return bb.getBounds().intersects(this.getBounds());
+	}
+
 	public boolean leftClicked() {
 		return (this.mouseOver() && display.getMouseManager().isLeft());
 	}

@@ -1,9 +1,12 @@
 package main.fire.rendering;
 
 import java.awt.Canvas;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Toolkit;
+import java.awt.event.HierarchyBoundsListener;
+import java.awt.event.HierarchyEvent;
 import java.awt.image.BufferStrategy;
 
 import javax.swing.JFrame;
@@ -39,6 +42,7 @@ public class SimpleDisplay implements ICache, IUpdateable, MainTick {
 	Key key;
 	MouseScroll scroll;
 	int ow, oh;
+	float scale;
 
 	public SimpleDisplay(int width, int height, String name, Program p) {
 		this.width = width;
@@ -54,6 +58,7 @@ public class SimpleDisplay implements ICache, IUpdateable, MainTick {
 
 		this.subscribeToUpdater(this);
 		this.createTicker(this);
+		scale = width / height;
 	}
 
 	public void create() {
@@ -70,9 +75,25 @@ public class SimpleDisplay implements ICache, IUpdateable, MainTick {
 		cv.addKeyListener(key);
 		cv.addMouseWheelListener(scroll);
 		mouseBounds = new SimpleBB(this, 0, 0, 0, 0);
-		mouseBounds.setShouldrender(true);
+		// mouseBounds.setShouldrender(true);
 
 		frame.add(cv);
+		cv.addHierarchyBoundsListener(new HierarchyBoundsListener() {
+
+			@Override
+			public void ancestorMoved(HierarchyEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void ancestorResized(HierarchyEvent e) {
+				Debug.printInfo("Resized Display, updating renderer", true);
+				render.updateSize(e.getChanged().getSize());
+
+			}
+
+		});
 
 	}
 
@@ -106,7 +127,7 @@ public class SimpleDisplay implements ICache, IUpdateable, MainTick {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		// UpscaleCalculator.calculateUpscale(width, height);
+		render.updateSize(new Dimension(width, height));
 	}
 
 	@Override
@@ -129,20 +150,17 @@ public class SimpleDisplay implements ICache, IUpdateable, MainTick {
 		if (shown) {
 			if (frame.getMousePosition() != null)
 				mousepos = frame.getMousePosition();
-			// mousepos.translate(mousepos.x / (ow / frame.getWidth()), mousepos.y / (oh /
-			// frame.getHeight()));
-			mouseBounds.tick();
+
 			if (frame.getMousePosition() != null)
 				mouseBounds.updatePos(mousepos.x - 10, mousepos.y - 30, 10, 10);
 
 			do {
 
 				gs = cv.getBufferStrategy().getDrawGraphics();
-				render.tickRenderer();
 
-				gs.drawImage(render.getFrame(), 0, 0, width, height, null);
+				gs.drawImage(render.show(), 0, 0, width, height, null);
 				bs.show();
-				gs.clearRect(0, 0, getWidth(), getHeight());
+				render.end();
 				gs.dispose();
 			} while (bs.contentsLost());
 		}

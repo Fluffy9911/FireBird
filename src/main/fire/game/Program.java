@@ -7,6 +7,7 @@ import main.fire.cache.CacheManager;
 import main.fire.cache.CacheObject;
 import main.fire.cache.ICache;
 import main.fire.core.Core;
+import main.fire.core.debug.CrashReporter;
 import main.fire.core.debug.Debug;
 import main.fire.core.debug.MSCalc;
 import main.fire.game.IO.KeyManager;
@@ -28,58 +29,70 @@ public abstract class Program implements IUpdateable, ICache {
 	SimpleDisplay display;
 	KeyManager keyManager;
 	Dual<CacheManager, CacheObject> cache;
+	String getLocation;
 
 	public Program(String name) {
-		Startup.startRuntime();
-		this.makeAnnotations();
-		addModulesEvent();
-
-		keyManager = new KeyManager();
-		PathMaker.makePath("firebird/cache/" + name);
 		try {
-			cache = Cache.createCacheDual(name + "/" + name);
-			cache.getOne().populateCacheObject(cache.getTwo());
-			cache.setTwo(new CacheObject());
-			cache.getOne().populateCacheObject(cache.getTwo());
-			loadCache(cache.getTwo());
-			saveCache(cache.getTwo());
+			Startup.startRuntime();
+			this.makeAnnotations();
+			addModulesEvent();
 
-		} catch (Exception e) {
-			e.printStackTrace();
-			Debug.error("Failed during cache startup");
-		}
-		this.subscribeToUpdater(this);
-		Debug.printInfo("Program starting...", true);
-		try {
-			MSCalc c = new MSCalc();
-			this.engine = new RuntimeEngine();
-			this.name = name;
+			keyManager = new KeyManager();
+			PathMaker.makePath("firebird/cache/" + name);
+			try {
+				cache = Cache.createCacheDual(name + "/" + name);
+				cache.getOne().populateCacheObject(cache.getTwo());
+				cache.setTwo(new CacheObject());
+				cache.getOne().populateCacheObject(cache.getTwo());
+				loadCache(cache.getTwo());
+				saveCache(cache.getTwo());
 
-			location = new File("firebird/cache/" + name);
-
-			programThread = engine.createThread(name + "-thread");
-
-			c.end();
-			Debug.printInfo("It took: " + c.getEnd() + "ms to start init the program", true);
-			Debug.printInfo("loaded modules " + ModuleLoader.modules.toString(), true);
-		} catch (Exception e) {
-			Debug.debugError(getClass(), e);
-		}
-		Runtime.getRuntime().addShutdownHook(new Thread() {
-			@Override
-			public void run() {
-
-				programEnd();
-				saveCache(Core.MAIN_CACHE_OBJECT);
+			} catch (Exception e) {
+				e.printStackTrace();
+				Debug.error("Failed during cache startup");
 			}
+			this.subscribeToUpdater(this);
+			Debug.printInfo("Program starting...", true);
+			try {
+				MSCalc c = new MSCalc();
+				this.engine = new RuntimeEngine();
+				this.name = name;
 
-		});
-		Core.addProgram(this);
+				location = new File("firebird/cache/" + name);
+
+				programThread = engine.createThread(name + "-thread");
+
+				c.end();
+				Debug.printInfo("It took: " + c.getEnd() + "ms to start init the program", true);
+				Debug.printInfo("loaded modules " + ModuleLoader.modules.toString(), true);
+			} catch (Exception e) {
+				Debug.debugError(getClass(), e);
+			}
+			Runtime.getRuntime().addShutdownHook(new Thread() {
+				@Override
+				public void run() {
+
+					programEnd();
+					saveCache(Core.MAIN_CACHE_OBJECT);
+				}
+
+			});
+			Core.addProgram(this);
+		} catch (Exception e) {
+			CrashReporter.dispatchCrash(e);
+		}
+
 	}
 
 	public void addDisplay(int width, int height) {
 		System.out.println("made display");
 		display = new SimpleDisplay(width, height, name, this);
+		engine.setDisplay(display);
+	}
+
+	public void addDisplay(SimpleDisplay ds) {
+		System.out.println("made display");
+		display = ds;
 		engine.setDisplay(display);
 	}
 
@@ -140,5 +153,7 @@ public abstract class Program implements IUpdateable, ICache {
 	public KeyManager getKeyManager() {
 		return keyManager;
 	}
+
+	public abstract String getProgramLocation();
 
 }
