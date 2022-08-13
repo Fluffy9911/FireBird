@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.Scanner;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -46,7 +47,17 @@ public class SaveFile {
 		this.info = object;
 
 	}
-
+public void writeArray(JSONArray arry) {
+	BufferedWriter writer;
+	save = location.getAsFile();
+	try {
+		writer = new BufferedWriter(new FileWriter(save, false));
+		arry.writeJSONString(writer);
+		writer.close();
+	} catch (IOException e) {
+		Debug.debugError(getClass(), e);
+	}
+}
 	public String getFileContents() throws IOException {
 		this.reloadFile();
 		String text = "";
@@ -83,7 +94,22 @@ public class SaveFile {
 		this.info = obj;
 		return obj;
 	}
+public JSONArray parseArray() {
+	JSONArray obj = new JSONArray();
+	JSONParser parser = new JSONParser();
 
+	try {
+		obj = (JSONArray) parser.parse(getFileContents());
+	} catch (ParseException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
+	return obj;
+}
 	public <T> T parseTypes(String key) throws ParseException, IOException {
 		return (T) this.parseContents().get(key);
 
