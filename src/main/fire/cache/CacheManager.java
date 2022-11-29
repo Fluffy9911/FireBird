@@ -114,14 +114,15 @@ public class CacheManager {
 
 					reader = new InputStreamReader(new FileInputStream(f));
 					parser.reset(reader);
-					if (parser.parse(reader) != null)
-						obj = (JSONObject) parser.parse(reader);
+					if (parser.getPosition() != JSONParser.S_IN_ERROR || parser.getPosition() != JSONParser.S_END)
+						if (parser.parse(reader) != null)
+							obj = (JSONObject) parser.parse(reader);
 
 					reader.close();
 
 				}
 		} catch (IOException | ParseException | CacheException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		}
 

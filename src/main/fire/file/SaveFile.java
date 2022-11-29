@@ -17,7 +17,7 @@ import main.fire.core.debug.Debug;
 import main.fire.resources.FileLocation;
 
 public class SaveFile {
-	private JSONObject info;
+	public JSONObject info;
 	private File save;
 	FileLocation location;
 
@@ -33,13 +33,19 @@ public class SaveFile {
 			save = location.getAsFile();
 			return true;
 		}
+		try {
+			location.getAsFile().createNewFile();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return false;
 	}
 
 	public void reloadFile() {
 
-		if (this.loadFile())
-			Debug.printInfo("File :" + location.getNamedFile(), true);
+		this.loadFile();
+		// Debug.printInfo("File :" + location.getNamedFile(), true);
 
 	}
 
@@ -47,17 +53,19 @@ public class SaveFile {
 		this.info = object;
 
 	}
-public void writeArray(JSONArray arry) {
-	BufferedWriter writer;
-	save = location.getAsFile();
-	try {
-		writer = new BufferedWriter(new FileWriter(save, false));
-		arry.writeJSONString(writer);
-		writer.close();
-	} catch (IOException e) {
-		Debug.debugError(getClass(), e);
+
+	public void writeArray(JSONArray arry) {
+		BufferedWriter writer;
+		save = location.getAsFile();
+		try {
+			writer = new BufferedWriter(new FileWriter(save, false));
+			arry.writeJSONString(writer);
+			writer.close();
+		} catch (IOException e) {
+			Debug.debugError(getClass(), e);
+		}
 	}
-}
+
 	public String getFileContents() throws IOException {
 		this.reloadFile();
 		String text = "";
@@ -89,27 +97,30 @@ public void writeArray(JSONArray arry) {
 	public Map<String, Object> parseContents() throws ParseException, IOException {
 		JSONObject obj = new JSONObject();
 		JSONParser parser = new JSONParser();
-
-		obj = (JSONObject) parser.parse(getFileContents());
-		this.info = obj;
+		if (!this.getFileContents().equals("")) {
+			obj = (JSONObject) parser.parse(getFileContents());
+			this.info = obj;
+		}
 		return obj;
 	}
-public JSONArray parseArray() {
-	JSONArray obj = new JSONArray();
-	JSONParser parser = new JSONParser();
 
-	try {
-		obj = (JSONArray) parser.parse(getFileContents());
-	} catch (ParseException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} catch (IOException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
+	public JSONArray parseArray() {
+		JSONArray obj = new JSONArray();
+		JSONParser parser = new JSONParser();
+
+		try {
+			obj = (JSONArray) parser.parse(getFileContents());
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return obj;
 	}
-	
-	return obj;
-}
+
 	public <T> T parseTypes(String key) throws ParseException, IOException {
 		return (T) this.parseContents().get(key);
 

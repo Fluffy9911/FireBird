@@ -47,17 +47,22 @@ public class SimpleDisplay implements ICache, IUpdateable, MainTick {
 	public SimpleDisplay(int width, int height, String name, Program p) {
 		this.width = width;
 		this.height = height;
+
 		ow = width;
 		oh = height;
+
 		this.name = name;
 		this.p = p;
+
 		mouse = new MouseManager();
 		key = new Key(p.getKeyManager());
 		scroll = new MouseScroll();
+
 		this.create();
 
 		this.subscribeToUpdater(this);
 		this.createTicker(this);
+
 		scale = width / height;
 	}
 
@@ -65,25 +70,24 @@ public class SimpleDisplay implements ICache, IUpdateable, MainTick {
 		cv = new Canvas();
 		frame = new JFrame(name);
 		render = new Renderer(this);
+		mousepos = new Point(0, 0);
+		mouseBounds = new SimpleBB(this, 0, 0, 0, 0);
+
 		frame.setSize(width, height);
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.setResizable(true);
-		mousepos = new Point(0, 0);
+
 		cv.setSize(width, height);
 		cv.setVisible(true);
 		cv.addMouseListener(mouse);
 		cv.addKeyListener(key);
 		cv.addMouseWheelListener(scroll);
-		mouseBounds = new SimpleBB(this, 0, 0, 0, 0);
-		// mouseBounds.setShouldrender(true);
 
 		frame.add(cv);
 		cv.addHierarchyBoundsListener(new HierarchyBoundsListener() {
 
 			@Override
 			public void ancestorMoved(HierarchyEvent e) {
-				// TODO Auto-generated method stub
-
 			}
 
 			@Override
@@ -99,14 +103,12 @@ public class SimpleDisplay implements ICache, IUpdateable, MainTick {
 
 	@Override
 	public void saveCache(CacheObject ob) {
-
 		ob.add(name + "width", width);
 		ob.add(name + "height", height);
 	}
 
 	@Override
 	public void loadCache(CacheObject obj) {
-
 		try {
 			if (obj.getObj().get(name + "width") != null) {
 				Debug.printInfo("found cached info loading...", true);
@@ -124,7 +126,7 @@ public class SimpleDisplay implements ICache, IUpdateable, MainTick {
 				frame.setSize(width, height);
 			}
 		} catch (CacheException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		}
 		render.updateSize(new Dimension(width, height));

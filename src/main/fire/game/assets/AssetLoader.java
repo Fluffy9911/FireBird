@@ -12,7 +12,8 @@ import main.fire.core.debug.Debug;
 
 public class AssetLoader {
 
-	private Map<String, URL> preLoaded;
+	private Map<String, String> preLoaded;
+	private Map<String, URL> loadable = new HashMap<>();
 	private String basePath = "";
 	private Map<String, BufferedImage> loaded;
 	private boolean isloaded = false;
@@ -29,7 +30,7 @@ public class AssetLoader {
 	}
 
 	public void loadAsset() {
-		for (Map.Entry<String, URL> entry : preLoaded.entrySet()) {
+		for (Map.Entry<String, URL> entry : loadable.entrySet()) {
 			BufferedImage img = new BufferedImage(16, 16, BufferedImage.OPAQUE);
 			try {
 				img = ImageIO.read(entry.getValue());
@@ -45,14 +46,9 @@ public class AssetLoader {
 		isloaded = true;
 	}
 
-	public void addTexture(String name, String sub) {
-		if (!this.validatePath(name, sub)) {
-			Debug.error("Invalid Texture Location: " + name);
-			Debug.error("/" + basePath + "/" + sub + "/" + name + ".png");
-			return;
-		}
-		if (this.validatePath(name, sub))
-			preLoaded.put(name, getFileLocation(name, sub));
+	public void add(String name, String sub) {
+
+		preLoaded.put(name, sub);
 
 	}
 
@@ -80,6 +76,15 @@ public class AssetLoader {
 	public URL getFileLocation(String name, String sub) {
 
 		return this.getClass().getResource("/" + basePath + "/" + sub + "/" + name + ".png");
+	}
+
+	public void searchForAssets() {
+		System.out.println("Starting asset search at: " + System.currentTimeMillis());
+		for (Map.Entry<String, String> entry : preLoaded.entrySet()) {
+			String key = entry.getKey();
+			String val = entry.getValue();
+
+		}
 	}
 
 	public Map<String, BufferedImage> getLoaded() {

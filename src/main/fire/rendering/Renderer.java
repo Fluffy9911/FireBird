@@ -5,6 +5,7 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -23,7 +24,7 @@ public class Renderer {
 	int frames = 0;
 
 	public Renderer(SimpleDisplay ds) {
-		frame = new BufferedImage(ds.getWidth(), ds.getHeight(), BufferedImage.TRANSLUCENT);
+		frame = new BufferedImage(ds.getWidth(), ds.getHeight(), BufferedImage.BITMASK);
 		this.ds = ds;
 		graphics = frame.createGraphics();
 		imageDim = new Dimension(ds.getWidth(), ds.getHeight());
@@ -43,11 +44,12 @@ public class Renderer {
 
 	}
 
-	public BufferedImage show() {
+	public synchronized BufferedImage show() {
 
 		long startTime = System.currentTimeMillis();
-		for (RenderingObject obj : toRender) {
-			obj.render(graphics);
+		for (Iterator iterator = toRender.iterator(); iterator.hasNext();) {
+			RenderingObject ob = (RenderingObject) iterator.next();
+			ob.render(graphics);
 		}
 		long end = System.currentTimeMillis() - startTime;
 		frames++;
@@ -57,7 +59,7 @@ public class Renderer {
 
 	void updateSize(Dimension size) {
 		if (!this.imageDim.equals(size)) {
-			frame = new BufferedImage(size.width, size.height, BufferedImage.TRANSLUCENT);
+			frame = new BufferedImage(size.width, size.height, BufferedImage.BITMASK);
 			this.graphics = frame.createGraphics();
 			imageDim = size;
 		}
@@ -67,7 +69,7 @@ public class Renderer {
 		graphics.clearRect(0, 0, (int) imageDim.getWidth(), (int) imageDim.getHeight());
 	}
 
-	public List<RenderingObject> getToRender() {
+	public synchronized List<RenderingObject> getToRender() {
 		return toRender;
 	}
 

@@ -1,0 +1,59 @@
+[Status: STARTING]Starting: CORE
+[Status: STARTING]Starting: CORE
+Getting settings...
+Starting core Init! Core Version: 2.0-beta in DEV
+Is first time setup? false
+Is first time setup? false
+Took:5 ms to read from file: main_cache.fbc
+starting map transfer...
+It took: 7ms to init the core.
+It took: 7ms to init the core.
+Starting updater...
+Updater working
+[Status: DONE]Started: CORE at: 2022/09/1920:35:30
+[Status: DONE]Started: CORE at: 2022/09/1920:35:30
+File Already Exists: dot-game.fbc
+Took:1 ms to read from file: dot-game.fbc
+starting map transfer...
+Took:0 ms to read from file: dot-game.fbc
+starting map transfer...
+Program starting...
+GameThread Status [name=dot-game-thread, thread_name=dot-game-thread, To Run=[], Status=STARTING, ThreadStatus: Thread[dot-game-thread,5,main]]
+It took: 1ms to start init the program
+loaded modules []
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+GameThread Status [name=dot-game-thread, thread_name=dot-game-thread, To Run=[main.fire.game.game.gameplay.SimpleBB$1@255b53dc, main.fire.util.MainTick$1@1dd92fe2, main.fire.game.BasicGame$2@6b53e23f, main.fire.game.BasicGame$3@64d2d351, main.fire.core.Core$2@1b68b9a4], Status=DONE, ThreadStatus: Thread[dot-game-thread,5,main]]
+GameThread Status [name=dot-game-thread, thread_name=dot-game-thread, To Run=[main.fire.game.game.gameplay.SimpleBB$1@255b53dc, main.fire.util.MainTick$1@1dd92fe2, main.fire.game.BasicGame$2@6b53e23f, main.fire.game.BasicGame$3@64d2d351, main.fire.core.Core$2@1b68b9a4], Status=DONE, ThreadStatus: Thread[dot-game-thread,5,main]]
+  free memory: 232,253  allocated memory: 258,048  max memory: 4,112,384  total free memory: 4,086,589  frames: 532
+  free memory: 227,950  allocated memory: 258,048  max memory: 4,112,384  total free memory: 4,082,286  frames: 314
+  free memory: 223,854  allocated memory: 258,048  max memory: 4,112,384  total free memory: 4,078,190  frames: 320
+  free memory: 220,017  allocated memory: 258,048  max memory: 4,112,384  total free memory: 4,074,353  frames: 293
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+  free memory: 161,519  allocated memory: 258,048  max memory: 4,112,384  total free memory: 4,015,855  frames: 67
+  free memory: 161,072  allocated memory: 258,048  max memory: 4,112,384  total free memory: 4,015,408  frames: 63
+  free memory: 159,918  allocated memory: 258,048  max memory: 4,112,384  total free memory: 4,014,254  frames: 61
+  free memory: 159,056  allocated memory: 258,048  max memory: 4,112,384  total free memory: 4,013,392  frames: 63
+  free memory: 158,318  allocated memory: 258,048  max memory: 4,112,384  total free memory: 4,012,654  frames: 62
+  free memory: 157,423  allocated memory: 258,048  max memory: 4,112,384  total free memory: 4,011,759  frames: 62
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+  free memory: 144,241  allocated memory: 258,048  max memory: 4,112,384  total free memory: 3,998,577  frames: 97
+  free memory: 140,145  allocated memory: 258,048  max memory: 4,112,384  total free memory: 3,994,481  frames: 329
+  free memory: 136,496  allocated memory: 258,048  max memory: 4,112,384  total free memory: 3,990,832  frames: 315
+  free memory: 133,742  allocated memory: 258,048  max memory: 4,112,384  total free memory: 3,988,078  frames: 250
+  free memory: 166,169  allocated memory: 258,048  max memory: 4,112,384  total free memory: 4,020,505  frames: 280
+  free memory: 162,073  allocated memory: 258,048  max memory: 4,112,384  total free memory: 4,016,409  frames: 295
+  free memory: 157,977  allocated memory: 258,048  max memory: 4,112,384  total free memory: 4,012,313  frames: 326
+  free memory: 153,881  allocated memory: 258,048  max memory: 4,112,384  total free memory: 4,008,217  frames: 324
+  free memory: 149,785  allocated memory: 258,048  max memory: 4,112,384  total free memory: 4,004,121  frames: 319
+  free memory: 145,689  allocated memory: 258,048  max memory: 4,112,384  total free memory: 4,000,025  frames: 325
+  free memory: 141,593  allocated memory: 258,048  max memory: 4,112,384  total free memory: 3,995,929  frames: 284

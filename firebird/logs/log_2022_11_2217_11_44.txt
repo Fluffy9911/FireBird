@@ -1,0 +1,207 @@
+[Status: STARTING]Starting: CORE
+[Status: STARTING]Starting: CORE
+Getting settings...
+Starting core Init! Core Version: 2.0-beta in DEV
+Is first time setup? false
+Is first time setup? false
+Took:5 ms to read from file: main_cache.fbc
+starting map transfer...
+It took: 8ms to init the core.
+It took: 8ms to init the core.
+Starting updater...
+Updater working
+[Status: DONE]Started: CORE at: 2022/11/2217:11:29
+[Status: DONE]Started: CORE at: 2022/11/2217:11:29
+File Already Exists: Dotz.fbc
+Took:1 ms to read from file: Dotz.fbc
+starting map transfer...
+Took:1 ms to read from file: Dotz.fbc
+starting map transfer...
+Program starting...
+GameThread Status [name=Dotz-thread, thread_name=Dotz-thread, To Run=[], Status=STARTING, ThreadStatus: Thread[Dotz-thread,5,main]]
+It took: 1ms to start init the program
+loaded modules []
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+GameThread Status [name=Dotz-thread, thread_name=Dotz-thread, To Run=[main.fire.game.game.gameplay.SimpleBB$1@33cb5951, main.fire.util.MainTick$1@365c30cc, main.fire.game.BasicGame$2@701fc37a, main.fire.game.BasicGame$3@4148db48, main.fire.core.Core$2@282003e1], Status=DONE, ThreadStatus: Thread[Dotz-thread,5,main]]
+GameThread Status [name=Dotz-thread, thread_name=Dotz-thread, To Run=[main.fire.game.game.gameplay.SimpleBB$1@33cb5951, main.fire.util.MainTick$1@365c30cc, main.fire.game.BasicGame$2@701fc37a, main.fire.game.BasicGame$3@4148db48, main.fire.core.Core$2@282003e1], Status=DONE, ThreadStatus: Thread[Dotz-thread,5,main]]
+  free memory: 237,115  allocated memory: 258,048  max memory: 4,112,384  total free memory: 4,091,451  frames: 52
+  free memory: 236,664  allocated memory: 258,048  max memory: 4,112,384  total free memory: 4,091,000  frames: 26
+  free memory: 236,214  allocated memory: 258,048  max memory: 4,112,384  total free memory: 4,090,550  frames: 26
+  free memory: 235,520  allocated memory: 258,048  max memory: 4,112,384  total free memory: 4,089,856  frames: 26
+  free memory: 248,879  allocated memory: 258,048  max memory: 4,112,384  total free memory: 4,103,215  frames: 22
+  free memory: 248,588  allocated memory: 258,048  max memory: 4,112,384  total free memory: 4,102,924  frames: 22
+  free memory: 248,588  allocated memory: 258,048  max memory: 4,112,384  total free memory: 4,102,924  frames: 20
+  free memory: 248,297  allocated memory: 258,048  max memory: 4,112,384  total free memory: 4,102,633  frames: 20
+  free memory: 248,006  allocated memory: 258,048  max memory: 4,112,384  total free memory: 4,102,342  frames: 20
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+  free memory: 159,650  allocated memory: 258,048  max memory: 4,112,384  total free memory: 4,013,986  frames: 18
+  free memory: 159,650  allocated memory: 258,048  max memory: 4,112,384  total free memory: 4,013,986  frames: 20
+  free memory: 159,650  allocated memory: 258,048  max memory: 4,112,384  total free memory: 4,013,986  frames: 20
+  free memory: 159,650  allocated memory: 258,048  max memory: 4,112,384  total free memory: 4,013,986  frames: 16
+  free memory: 158,624  allocated memory: 258,048  max memory: 4,112,384  total free memory: 4,012,960  frames: 12

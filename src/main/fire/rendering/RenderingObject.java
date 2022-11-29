@@ -10,7 +10,7 @@ public abstract class RenderingObject {
 		add();
 	}
 
-	public void add() {
+	public synchronized void add() {
 		r.getToRender().add(this);
 	}
 

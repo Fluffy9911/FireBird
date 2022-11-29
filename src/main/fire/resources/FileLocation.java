@@ -1,8 +1,8 @@
 package main.fire.resources;
 
 import java.io.File;
-import java.io.IOException;
 
+import main.fire.util.PathMaker;
 import main.utils.FileExtension;
 
 public class FileLocation {
@@ -10,16 +10,12 @@ public class FileLocation {
 	private FileExtension extension;
 
 	public FileLocation(String location, String name, FileExtension extension) {
+		PathMaker.makePath(location);
 		this.location = location;
 		this.name = name;
 		this.extension = extension;
 		this.fixlocation();
-		try {
-			System.out.println(this.getAsFile().createNewFile());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 	}
 
 	void fixlocation() {
@@ -37,7 +33,7 @@ public class FileLocation {
 	}
 
 	public File getAsFile() {
-		System.out.println(this.buildPath());
+
 		return new File(this.buildPath());
 	}
 

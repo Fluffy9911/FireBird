@@ -1,8 +1,10 @@
 package main.fire.game.game.gameplay;
 
+import java.io.Serializable;
+
 import main.fire.rendering.SimpleDisplay;
 
-public class BasicBB extends SimpleBB {
+public class BasicBB extends SimpleBB implements Serializable {
 	SimpleDisplay display;
 
 	public BasicBB(SimpleDisplay ds, int x, int y, int width, int height) {

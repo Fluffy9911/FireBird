@@ -1,0 +1,28 @@
+[Status: STARTING]Starting: CORE
+[Status: STARTING]Starting: CORE
+Getting settings...
+Starting core Init! Core Version: 2.0-beta in DEV
+Is first time setup? false
+Is first time setup? false
+Took:5 ms to read from file: main_cache.fbc
+starting map transfer...
+It took: 8ms to init the core.
+It took: 8ms to init the core.
+Starting updater...
+Updater working
+[Status: DONE]Started: CORE at: 2022/08/2417:44:08
+[Status: DONE]Started: CORE at: 2022/08/2417:44:08
+File Already Exists: sine.fbc
+Took:1 ms to read from file: sine.fbc
+starting map transfer...
+Took:0 ms to read from file: sine.fbc
+starting map transfer...
+Program starting...
+GameThread Status [name=sine-thread, thread_name=sine-thread, To Run=[], Status=STARTING, ThreadStatus: Thread[sine-thread,5,main]]
+It took: 1ms to start init the program
+loaded modules []
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer

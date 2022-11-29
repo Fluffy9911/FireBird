@@ -12,7 +12,6 @@ import main.fire.anotations.End;
 import main.fire.anotations.Marked;
 import main.fire.core.Core;
 import main.fire.core.debug.Debug;
-import main.fire.game.Program;
 import main.fire.game.assets.AssetLoader;
 
 public class Startup {
@@ -23,7 +22,7 @@ public class Startup {
 	public static void startRuntime() {
 		Reflections find = new Reflections("main.fire", new MethodAnnotationsScanner());
 		Set<Method> toCall = find.getMethodsAnnotatedWith(Marked.class);
-
+		System.out.println("Finding startup methods");
 		for (Iterator iterator = toCall.iterator(); iterator.hasNext();) {
 			Method method = (Method) iterator.next();
 			try {
@@ -67,6 +66,7 @@ public class Startup {
 
 		});
 		Core.initCore();
+
 	}
 
 	public static boolean testStart() {
@@ -77,13 +77,6 @@ public class Startup {
 			return false;
 		}
 		return true;
-	}
-
-	public static Program startGameInstance(Program game) {
-		game.getProgramThread().startThread();
-		game.start();
-
-		return game;
 	}
 
 }

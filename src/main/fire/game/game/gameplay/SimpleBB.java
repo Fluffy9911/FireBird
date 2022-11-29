@@ -1,53 +1,28 @@
 package main.fire.game.game.gameplay;
 
-import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.io.Serializable;
 
-import main.fire.rendering.RenderUtils;
-import main.fire.rendering.Renderer;
-import main.fire.rendering.RenderingObject;
-import main.fire.rendering.SimpleDisplay;
-import main.fire.runtime.IRun;
 import main.fire.util.MainTick;
 
-public class SimpleBB implements MainTick {
-	Renderer render;
+public class SimpleBB implements MainTick, Serializable {
+
 	int x, y, width, height;
 	Rectangle bounds;
 	boolean shouldrender = false;
 
-	public SimpleBB(SimpleDisplay ds, int x, int y, int width, int height) {
-		this.render = ds.getRender();
+	public SimpleBB(int x, int y, int width, int height) {
+
 		this.x = x;
 		this.y = y;
 		this.width = width;
 		this.height = height;
 		this.bounds = new Rectangle(x, y, width, height);
-		ds.getProgram().getProgramThread().addRun(new IRun() {
 
-			@Override
-			public void run() {
-				tick();
-			}
-
-		});
 	}
 
 	@Override
 	public void tick() {
-		if (shouldrender)
-			new RenderingObject(render) {
-
-				@Override
-				public void render(Graphics g) {
-
-					g.setColor(Color.RED);
-					RenderUtils.drawRectangle(bounds, g);
-
-				}
-
-			};
 
 		this.updatePos(x, y, width, height);
 	}

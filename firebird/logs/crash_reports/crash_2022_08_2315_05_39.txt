@@ -1,0 +1,32 @@
+[Status: STARTING]Starting: CORE
+[Status: STARTING]Starting: CORE
+[Status: STARTING]Starting: CORE
+Getting settings...
+Getting settings...
+Getting settings...
+Starting core Init! Core Version: 2.0-beta in DEV
+Starting core Init! Core Version: 2.0-beta in DEV
+Starting core Init! Core Version: 2.0-beta in DEV
+Is first time setup? false
+Is first time setup? false
+Is first time setup? false
+Took:3 ms to read from file: main_cache.fbc
+Took:3 ms to read from file: main_cache.fbc
+Took:3 ms to read from file: main_cache.fbc
+starting map transfer...
+starting map transfer...
+starting map transfer...
+It took: 5ms to init the core.
+It took: 5ms to init the core.
+It took: 5ms to init the core.
+Starting updater...
+Starting updater...
+Starting updater...
+Updater working
+Updater working
+Updater working
+[Status: DONE]Started: CORE at: 2022/08/2315:05:39
+[Status: DONE]Started: CORE at: 2022/08/2315:05:39
+[Status: DONE]Started: CORE at: 2022/08/2315:05:39
+PositionAnimation [pos=null, start=1, animationThread=Thread[Thread-2,5,main], tpa=1000]
+ Crash Reson:Cannot invoke "java.lang.Integer.intValue()" because "number" is null

@@ -1,0 +1,7 @@
+Unexpected token END OF FILE at position 0.
+	at org.json.simple.parser.JSONParser.parse(JSONParser.java:257)
+	at org.json.simple.parser.JSONParser.parse(JSONParser.java:81)
+	at org.json.simple.parser.JSONParser.parse(JSONParser.java:75)
+	at main.fire.file.SaveFile.parseContents(SaveFile.java:101)
+	at main.fire.file.ConfigFile.<init>(ConfigFile.java:21)
+	at main.fire.runtime.TestStarter.main(TestStarter.java:44)

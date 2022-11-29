@@ -1,6 +1,5 @@
 package main.games.dot;
 
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Point;
@@ -8,7 +7,7 @@ import java.awt.Point;
 import main.fire.cache.CacheObject;
 import main.fire.game.BasicGame;
 import main.fire.rendering.RenderingObject;
-import main.fire.rendering.SpecialTextRenderer;
+import main.fire.runtime.Startup;
 
 public class DotMain extends BasicGame {
 	static Point playerpos;
@@ -59,6 +58,7 @@ public class DotMain extends BasicGame {
 
 	@Override
 	public void start() {
+
 		this.getEngine().printThreadsStatus();
 		playerpos = new Point(0, 0);
 		player = new PlayerDot(null, 15, 50, 50);
@@ -73,15 +73,12 @@ public class DotMain extends BasicGame {
 				player.render(g);
 				mng.render(g);
 
-				// g.drawString("Score: " + player.score + " Difficulty: " + difficulty + "
-				// Level: " + level, 0, 15);
+				g.drawString("Score: " + player.score + " Difficulty: " + difficulty + " Level: " + level, 0, 15);
 
 			}
 
 		};
-		SpecialTextRenderer.createAndRender(new SpecialTextRenderer(Color.WHITE,
-				"Score: " + player.score + " Difficulty: " + difficulty + " Level: " + level, this.getGameRenderer()),
-				0, 15);
+
 	}
 
 	@Override
@@ -98,6 +95,10 @@ public class DotMain extends BasicGame {
 	public String getProgramLocation() {
 
 		return "firebird/dotgame";
+	}
+
+	public static void main(String[] args) {
+		Startup.startGameInstance(new DotMain("Dotz", 600, 200));
 	}
 
 }

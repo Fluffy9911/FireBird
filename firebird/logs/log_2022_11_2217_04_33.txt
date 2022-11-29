@@ -1,0 +1,44 @@
+[Status: STARTING]Starting: CORE
+[Status: STARTING]Starting: CORE
+Getting settings...
+Starting core Init! Core Version: 2.0-beta in DEV
+Is first time setup? false
+Is first time setup? false
+Took:6 ms to read from file: main_cache.fbc
+starting map transfer...
+It took: 8ms to init the core.
+It took: 8ms to init the core.
+Starting updater...
+Updater working
+[Status: DONE]Started: CORE at: 2022/11/2217:04:26
+[Status: DONE]Started: CORE at: 2022/11/2217:04:26
+The filename, directory name, or volume label syntax is incorrect
+Took:0 ms to read from file: Dotz?.fbc
+starting map transfer...
+Took:0 ms to read from file: Dotz?.fbc
+starting map transfer...
+Program starting...
+GameThread Status [name=Dotz?-thread, thread_name=Dotz?-thread, To Run=[], Status=STARTING, ThreadStatus: Thread[Dotz?-thread,5,main]]
+It took: 1ms to start init the program
+loaded modules []
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+Resized Display, updating renderer
+GameThread Status [name=Dotz?-thread, thread_name=Dotz?-thread, To Run=[main.fire.game.game.gameplay.SimpleBB$1@33cb5951, main.fire.util.MainTick$1@365c30cc, main.fire.game.BasicGame$2@701fc37a, main.fire.game.BasicGame$3@4148db48, main.fire.core.Core$2@282003e1], Status=DONE, ThreadStatus: Thread[Dotz?-thread,5,main]]
+GameThread Status [name=Dotz?-thread, thread_name=Dotz?-thread, To Run=[main.fire.game.game.gameplay.SimpleBB$1@33cb5951, main.fire.util.MainTick$1@365c30cc, main.fire.game.BasicGame$2@701fc37a, main.fire.game.BasicGame$3@4148db48, main.fire.core.Core$2@282003e1], Status=DONE, ThreadStatus: Thread[Dotz?-thread,5,main]]
+firebird\cache\Dotz?\Dotz?.fbc (The filename, directory name, or volume label syntax is incorrect)
+firebird\cache\Dotz?\Dotz?.fbc (The filename, directory name, or volume label syntax is incorrect)
+  free memory: 234,303  allocated memory: 258,048  max memory: 4,112,384  total free memory: 4,088,639  frames: 1,317
+firebird\cache\Dotz?\Dotz?.fbc (The filename, directory name, or volume label syntax is incorrect)
+  free memory: 226,359  allocated memory: 258,048  max memory: 4,112,384  total free memory: 4,080,695  frames: 713
+firebird\cache\Dotz?\Dotz?.fbc (The filename, directory name, or volume label syntax is incorrect)
+  free memory: 218,167  allocated memory: 258,048  max memory: 4,112,384  total free memory: 4,072,503  frames: 743
+firebird\cache\Dotz?\Dotz?.fbc (The filename, directory name, or volume label syntax is incorrect)
+  free memory: 239,586  allocated memory: 258,048  max memory: 4,112,384  total free memory: 4,093,922  frames: 783
+firebird\cache\Dotz?\Dotz?.fbc (The filename, directory name, or volume label syntax is incorrect)
+  free memory: 230,368  allocated memory: 258,048  max memory: 4,112,384  total free memory: 4,084,704  frames: 818
+firebird\cache\Dotz?\Dotz?.fbc (The filename, directory name, or volume label syntax is incorrect)
+  free memory: 222,176  allocated memory: 258,048  max memory: 4,112,384  total free memory: 4,076,512  frames: 816
+firebird\cache\Dotz?\Dotz?.fbc (The filename, directory name, or volume label syntax is incorrect)
