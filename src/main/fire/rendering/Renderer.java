@@ -11,7 +11,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import main.fire.core.Core;
-import main.fire.game.BasicGame;
+
 import main.fire.util.PerformanceChecker;
 
 public class Renderer {
@@ -31,16 +31,7 @@ public class Renderer {
 
 		toRender = new ArrayList<>();
 
-		new Timer().schedule(new TimerTask() {
-
-			@Override
-			public void run() {
-				if (Core.getGameProgram() instanceof BasicGame)
-					PerformanceChecker.check(((BasicGame) Core.getGameProgram()).getGameRenderer());
-				frames = 0;
-			}
-
-		}, 2000, 1000);
+		
 
 	}
 

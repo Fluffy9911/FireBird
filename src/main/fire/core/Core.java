@@ -2,6 +2,7 @@ package main.fire.core;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.Timer;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -28,6 +29,7 @@ public class Core {
 	public static final String ASSET_LOCATION = "main/resources/firebird";
 	public static final String CORE_CRASH_LOCATION = "firebird/logs/crash_reports";
 	public static final Executor EXECUTOR = Executors.newCachedThreadPool();
+	public static final Scanner scanner = new Scanner(System.in);
 	// init needed
 	public static CacheManager MAIN_CACHE;
 	public static CacheObject MAIN_CACHE_OBJECT;

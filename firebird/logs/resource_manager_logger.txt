@@ -1,0 +1,1 @@
+[logger: resource_manager_logger : heeeyyy]2022_11_2919_05_12 [logger: resource_manager_logger : Ok, Printing out to location: firebird/logs]2022_11_2919_05_12 

@@ -1,0 +1,2 @@
+$DBG-CHANGE_LOC - requires input location.
+DBG-PRINT_RESOURCE - prints ResourceManagers logger to current location.

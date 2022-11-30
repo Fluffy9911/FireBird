@@ -20,11 +20,11 @@ import main.fire.game.Program;
 import main.fire.game.IO.Key;
 import main.fire.game.IO.MouseManager;
 import main.fire.game.IO.MouseScroll;
-import main.fire.game.game.gameplay.SimpleBB;
-import main.fire.util.IUpdateable;
-import main.fire.util.MainTick;
 
-public class SimpleDisplay implements ICache, IUpdateable, MainTick {
+import main.fire.util.IUpdateable;
+
+
+public class SimpleDisplay implements ICache, IUpdateable {
 
 	JFrame frame;
 	Canvas cv;
@@ -37,7 +37,7 @@ public class SimpleDisplay implements ICache, IUpdateable, MainTick {
 	boolean shown = false;
 	MouseManager mouse;
 	Point mousepos;
-	SimpleBB mouseBounds;
+	//SimpleBB mouseBounds;
 	Program p;
 	Key key;
 	MouseScroll scroll;
@@ -55,13 +55,13 @@ public class SimpleDisplay implements ICache, IUpdateable, MainTick {
 		this.p = p;
 
 		mouse = new MouseManager();
-		key = new Key(p.getKeyManager());
+		//key = new Key(p.getKeyManager());
 		scroll = new MouseScroll();
 
 		this.create();
 
 		this.subscribeToUpdater(this);
-		this.createTicker(this);
+		//this.createTicker(this);
 
 		scale = width / height;
 	}
@@ -71,7 +71,7 @@ public class SimpleDisplay implements ICache, IUpdateable, MainTick {
 		frame = new JFrame(name);
 		render = new Renderer(this);
 		mousepos = new Point(0, 0);
-		mouseBounds = new SimpleBB(this, 0, 0, 0, 0);
+		//mouseBounds = new SimpleBB(0, 0, 0, 0);
 
 		frame.setSize(width, height);
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -146,7 +146,7 @@ public class SimpleDisplay implements ICache, IUpdateable, MainTick {
 		return height;
 	}
 
-	@Override
+	
 	public void tick() {
 
 		if (shown) {
@@ -154,7 +154,7 @@ public class SimpleDisplay implements ICache, IUpdateable, MainTick {
 				mousepos = frame.getMousePosition();
 
 			if (frame.getMousePosition() != null)
-				mouseBounds.updatePos(mousepos.x - 10, mousepos.y - 30, 10, 10);
+			//	mouseBounds.updatePos(mousepos.x - 10, mousepos.y - 30, 10, 10);
 
 			do {
 
@@ -185,9 +185,7 @@ public class SimpleDisplay implements ICache, IUpdateable, MainTick {
 		return mouse;
 	}
 
-	public SimpleBB getMouseBounds() {
-		return mouseBounds;
-	}
+	
 
 	public JFrame getFrame() {
 		return frame;

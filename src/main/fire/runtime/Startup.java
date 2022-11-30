@@ -17,7 +17,7 @@ import main.fire.game.assets.AssetLoader;
 public class Startup {
 	AssetLoader loader;
 
-	MenuHandler handler;
+	
 
 	public static void startRuntime() {
 		Reflections find = new Reflections("main.fire", new MethodAnnotationsScanner());

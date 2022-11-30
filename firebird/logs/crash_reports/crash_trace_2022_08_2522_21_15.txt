@@ -1,2 +1,0 @@
-java.lang.NullPointerException: Cannot invoke "main.fire.runtime.util.Cat.toString()" because "l" is null
-	at main.fire.runtime.TestStarter.main(TestStarter.java:43)

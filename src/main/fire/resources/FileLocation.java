@@ -41,4 +41,8 @@ public class FileLocation {
 		return this.buildPath();
 	}
 
+	public String getName() {
+		return name;
+	}
+
 }
